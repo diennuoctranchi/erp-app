@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191123034219) do
+ActiveRecord::Schema.define(version: 20200110144108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -280,29 +280,6 @@ ActiveRecord::Schema.define(version: 20191123034219) do
     t.index ["creator_id"], name: "index_erp_contacts_titles_on_creator_id"
   end
 
-  create_table "erp_currencies_currencies", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.string "code"
-    t.boolean "archived", default: false
-    t.integer "creator_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["creator_id"], name: "index_erp_currencies_currencies_on_creator_id"
-  end
-
-  create_table "erp_currencies_price_terms", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.string "code"
-    t.string "use_for"
-    t.boolean "archived", default: false
-    t.integer "creator_id"
-    t.integer "currency_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["creator_id"], name: "index_erp_currencies_price_terms_on_creator_id"
-    t.index ["currency_id"], name: "index_erp_currencies_price_terms_on_currency_id"
-  end
-
   create_table "erp_deliveries_deliveries", id: :serial, force: :cascade do |t|
     t.string "code"
     t.datetime "date"
@@ -371,6 +348,8 @@ ActiveRecord::Schema.define(version: 20191123034219) do
     t.boolean "is_show_detail", default: true
     t.integer "number_per_page", default: 12
     t.boolean "use_filter", default: false
+    t.integer "limit_product_name", default: 52
+    t.string "alias"
     t.index ["brand_group_id"], name: "index_erp_menus_menus_on_brand_group_id"
     t.index ["creator_id"], name: "index_erp_menus_menus_on_creator_id"
   end
@@ -481,72 +460,6 @@ ActiveRecord::Schema.define(version: 20191123034219) do
     t.index ["supplier_id"], name: "index_erp_orders_orders_on_supplier_id"
     t.index ["tax_id"], name: "index_erp_orders_orders_on_tax_id"
     t.index ["warehouse_id"], name: "index_erp_orders_orders_on_warehouse_id"
-  end
-
-  create_table "erp_payments_accounts", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.string "account_number"
-    t.string "owner"
-    t.boolean "archived", default: false
-    t.integer "creator_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["creator_id"], name: "index_erp_payments_accounts_on_creator_id"
-  end
-
-  create_table "erp_payments_debts", id: :serial, force: :cascade do |t|
-    t.integer "order_id"
-    t.datetime "deadline"
-    t.string "note"
-    t.boolean "archived", default: false
-    t.integer "creator_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["creator_id"], name: "index_erp_payments_debts_on_creator_id"
-    t.index ["order_id"], name: "index_erp_payments_debts_on_order_id"
-  end
-
-  create_table "erp_payments_payment_methods", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.string "type_method"
-    t.boolean "is_default"
-    t.boolean "archived", default: false
-    t.integer "creator_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["creator_id"], name: "index_erp_payments_payment_methods_on_creator_id"
-  end
-
-  create_table "erp_payments_payment_records", id: :serial, force: :cascade do |t|
-    t.string "code"
-    t.string "payment_type"
-    t.decimal "amount"
-    t.datetime "payment_date"
-    t.text "description"
-    t.string "status"
-    t.boolean "archived", default: false
-    t.integer "order_id"
-    t.integer "accountant_id"
-    t.integer "contact_id"
-    t.integer "creator_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["accountant_id"], name: "index_erp_payments_payment_records_on_accountant_id"
-    t.index ["contact_id"], name: "index_erp_payments_payment_records_on_contact_id"
-    t.index ["creator_id"], name: "index_erp_payments_payment_records_on_creator_id"
-    t.index ["order_id"], name: "index_erp_payments_payment_records_on_order_id"
-  end
-
-  create_table "erp_payments_payment_terms", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.integer "timeout", default: 0
-    t.string "started_on"
-    t.boolean "is_default"
-    t.boolean "archived", default: false
-    t.integer "creator_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["creator_id"], name: "index_erp_payments_payment_terms_on_creator_id"
   end
 
   create_table "erp_products_accessories", id: :serial, force: :cascade do |t|
@@ -796,8 +709,8 @@ ActiveRecord::Schema.define(version: 20191123034219) do
   create_table "erp_products_product_images", id: :serial, force: :cascade do |t|
     t.integer "product_id"
     t.string "image_url"
-    t.datetime "created_at", default: "2019-11-15 04:27:38", null: false
-    t.datetime "updated_at", default: "2019-11-15 04:27:38", null: false
+    t.datetime "created_at", default: "2020-03-18 15:25:54", null: false
+    t.datetime "updated_at", default: "2020-03-18 15:25:54", null: false
     t.index ["product_id"], name: "index_erp_products_product_images_on_product_id"
   end
 
@@ -848,12 +761,13 @@ ActiveRecord::Schema.define(version: 20191123034219) do
     t.text "cache_properties"
     t.integer "cache_stock"
     t.boolean "is_call", default: false
-    t.string "ebay_id"
-    t.string "amazon_id"
-    t.text "specs"
     t.string "dimentions"
     t.string "weights"
     t.string "warranty"
+    t.string "datasheet"
+    t.string "ebay_id"
+    t.string "amazon_id"
+    t.text "specs"
     t.index ["accessory_id"], name: "index_erp_products_products_on_accessory_id"
     t.index ["brand_id"], name: "index_erp_products_products_on_brand_id"
     t.index ["category_id"], name: "index_erp_products_products_on_category_id"
@@ -1073,19 +987,6 @@ ActiveRecord::Schema.define(version: 20191123034219) do
     t.index ["state_id"], name: "index_erp_quick_orders_orders_on_state_id"
   end
 
-  create_table "erp_taxes_taxes", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.string "short_name"
-    t.string "scope"
-    t.string "computation"
-    t.decimal "amount", default: "0.0"
-    t.boolean "archived", default: false
-    t.integer "creator_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["creator_id"], name: "index_erp_taxes_taxes_on_creator_id"
-  end
-
   create_table "erp_testimonials_testimonials", id: :serial, force: :cascade do |t|
     t.string "logo"
     t.string "author"
@@ -1143,18 +1044,6 @@ ActiveRecord::Schema.define(version: 20191123034219) do
     t.index ["email"], name: "index_erp_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_erp_users_on_reset_password_token", unique: true
     t.index ["user_group_id"], name: "index_erp_users_on_user_group_id"
-  end
-
-  create_table "erp_warehouses_warehouses", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.string "short_name"
-    t.integer "creator_id"
-    t.integer "contact_id"
-    t.boolean "archived", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["contact_id"], name: "index_erp_warehouses_warehouses_on_contact_id"
-    t.index ["creator_id"], name: "index_erp_warehouses_warehouses_on_creator_id"
   end
 
   create_table "version_associations", force: :cascade do |t|
