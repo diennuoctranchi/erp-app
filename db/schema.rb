@@ -284,7 +284,7 @@ ActiveRecord::Schema.define(version: 20200110144108) do
     t.string "code"
     t.datetime "date"
     t.string "delivery_type"
-    t.string "status", default: "delivered"
+    t.string "status", default: "pending"
     t.boolean "archived", default: false
     t.integer "order_id"
     t.integer "warehouse_id"
@@ -303,7 +303,7 @@ ActiveRecord::Schema.define(version: 20200110144108) do
   end
 
   create_table "erp_deliveries_delivery_details", id: :serial, force: :cascade do |t|
-    t.integer "quantity"
+    t.integer "quantity", default: 1
     t.string "serial_numbers"
     t.integer "delivery_id"
     t.integer "order_detail_id"
@@ -522,7 +522,6 @@ ActiveRecord::Schema.define(version: 20200110144108) do
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_erp_products_cache_stocks_on_product_id"
     t.index ["state_id"], name: "index_erp_products_cache_stocks_on_state_id"
-    t.index ["stock"], name: "index_erp_products_cache_stocks_on_stock"
     t.index ["warehouse_id"], name: "index_erp_products_cache_stocks_on_warehouse_id"
   end
 
@@ -709,8 +708,13 @@ ActiveRecord::Schema.define(version: 20200110144108) do
   create_table "erp_products_product_images", id: :serial, force: :cascade do |t|
     t.integer "product_id"
     t.string "image_url"
+<<<<<<< HEAD
     t.datetime "created_at", default: "2020-03-18 15:25:54", null: false
     t.datetime "updated_at", default: "2020-03-18 15:25:54", null: false
+=======
+    t.datetime "created_at", default: "2017-05-15 03:54:25", null: false
+    t.datetime "updated_at", default: "2017-05-15 03:54:25", null: false
+>>>>>>> 6d22f8bf47b8e6def09669f71d437c48f70920d2
     t.index ["product_id"], name: "index_erp_products_product_images_on_product_id"
   end
 
@@ -756,7 +760,9 @@ ActiveRecord::Schema.define(version: 20200110144108) do
     t.string "product_intro_link"
     t.text "cache_search"
     t.boolean "is_stock_inventory", default: false
+    t.string "ebay_id"
     t.string "alias"
+    t.string "amazon_id"
     t.boolean "is_sold_out", default: false
     t.text "cache_properties"
     t.integer "cache_stock"
@@ -1029,15 +1035,15 @@ ActiveRecord::Schema.define(version: 20200110144108) do
     t.string "timezone"
     t.boolean "active", default: false
     t.integer "creator_id"
+    t.integer "contact_id"
     t.text "permissions"
     t.string "confirmation_token"
-    t.datetime "confirmed_at", default: -> { "CURRENT_TIMESTAMP" }
+    t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.bigint "user_group_id"
     t.string "address"
     t.text "data"
     t.text "cache_search"
-    t.integer "contact_id"
     t.index ["confirmation_token"], name: "index_erp_users_on_confirmation_token", unique: true
     t.index ["contact_id"], name: "index_erp_users_on_contact_id"
     t.index ["creator_id"], name: "index_erp_users_on_creator_id"

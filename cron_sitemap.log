@@ -1,8 +1,8 @@
 Association Tracking for PaperTrail has been extracted to a separate gem. To use it, please add `paper_trail-association_tracking` to your Gemfile. If you don't use it (most people don't, that's the default) and you set `track_associations = false` somewhere (probably a rails initializer) you can remove that line now.
 In '/home/timhangcongnghe/prod/public/':
-+ sitemap.xml.gz                                        9084 links /     185 KB
-Sitemap stats: 9,084 links / 1 sitemaps / 0m06s
++ sitemap.xml.gz                                       10449 links /     224 KB
+Sitemap stats: 10,449 links / 1 sitemaps / 0m07s
 
-Pinging with URL 'http://timhangcongnghe.com/sitemap.xml.gz':
+Pinging with URL 'https://timhangcongnghe.com/sitemap.xml.gz':
   Successful ping of Google
   Successful ping of Bing
