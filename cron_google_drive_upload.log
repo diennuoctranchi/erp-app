@@ -1,22 +1,3 @@
-Uploading... /home/timhangcongnghe/prod/engines/core/../../../backup/2019_11_27_220005_timhangcongnghe_production_db_source.zip
-/usr/local/rvm/gems/ruby-2.3.3/gems/google-api-client-0.30.10/lib/google/apis/core/http_command.rb:228:in `check_status': storageQuotaExceeded: The user's Drive storage quota has been exceeded. (Google::Apis::ClientError)
-	from /usr/local/rvm/gems/ruby-2.3.3/gems/google-api-client-0.30.10/lib/google/apis/core/api_command.rb:117:in `check_status'
-	from /usr/local/rvm/gems/ruby-2.3.3/gems/google-api-client-0.30.10/lib/google/apis/core/http_command.rb:193:in `process_response'
-	from /usr/local/rvm/gems/ruby-2.3.3/gems/google-api-client-0.30.10/lib/google/apis/core/upload.rb:170:in `process_response'
-	from /usr/local/rvm/gems/ruby-2.3.3/gems/google-api-client-0.30.10/lib/google/apis/core/upload.rb:246:in `execute_once'
-	from /usr/local/rvm/gems/ruby-2.3.3/gems/google-api-client-0.30.10/lib/google/apis/core/http_command.rb:113:in `block (2 levels) in execute'
-	from /usr/local/rvm/gems/ruby-2.3.3/gems/retriable-3.1.2/lib/retriable.rb:61:in `block in retriable'
-	from /usr/local/rvm/gems/ruby-2.3.3/gems/retriable-3.1.2/lib/retriable.rb:56:in `times'
-	from /usr/local/rvm/gems/ruby-2.3.3/gems/retriable-3.1.2/lib/retriable.rb:56:in `retriable'
-	from /usr/local/rvm/gems/ruby-2.3.3/gems/google-api-client-0.30.10/lib/google/apis/core/http_command.rb:110:in `block in execute'
-	from /usr/local/rvm/gems/ruby-2.3.3/gems/retriable-3.1.2/lib/retriable.rb:61:in `block in retriable'
-	from /usr/local/rvm/gems/ruby-2.3.3/gems/retriable-3.1.2/lib/retriable.rb:56:in `times'
-	from /usr/local/rvm/gems/ruby-2.3.3/gems/retriable-3.1.2/lib/retriable.rb:56:in `retriable'
-	from /usr/local/rvm/gems/ruby-2.3.3/gems/google-api-client-0.30.10/lib/google/apis/core/http_command.rb:102:in `execute'
-	from /usr/local/rvm/gems/ruby-2.3.3/gems/google-api-client-0.30.10/lib/google/apis/core/base_service.rb:360:in `execute_or_queue_command'
-	from /usr/local/rvm/gems/ruby-2.3.3/gems/google-api-client-0.30.10/generated/google/apis/drive_v3/service.rb:905:in `create_file'
-	from /usr/local/rvm/gems/ruby-2.3.3/gems/google_drive-3.0.3/lib/google_drive/session.rb:677:in `upload_from_source'
-	from /usr/local/rvm/gems/ruby-2.3.3/gems/google_drive-3.0.3/lib/google_drive/session.rb:564:in `upload_from_file'
-	from /usr/local/rvm/gems/ruby-2.3.3/gems/google_drive-3.0.3/lib/google_drive/collection.rb:100:in `upload_from_file'
-	from /home/timhangcongnghe/prod/engines/core/app/models/erp/system.rb:235:in `upload_backup_to_google_drive'
-	from /home/timhangcongnghe/prod/engines/core/cron_google_drive_upload.rb:8:in `<main>'
+Uploading... /home/timhangcongnghe/prod/engines/core/../../../backup/2020_03_24_220004_timhangcongnghe_production_db_source.zip
+Deleting old backup... 2020_03_23_220006_timhangcongnghe_production_db_source.zip
+done

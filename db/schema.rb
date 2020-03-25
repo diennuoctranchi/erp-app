@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191123034219) do
+ActiveRecord::Schema.define(version: 20200110144108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -307,7 +307,7 @@ ActiveRecord::Schema.define(version: 20191123034219) do
     t.string "code"
     t.datetime "date"
     t.string "delivery_type"
-    t.string "status", default: "delivered"
+    t.string "status", default: "pending"
     t.boolean "archived", default: false
     t.integer "order_id"
     t.integer "warehouse_id"
@@ -326,7 +326,7 @@ ActiveRecord::Schema.define(version: 20191123034219) do
   end
 
   create_table "erp_deliveries_delivery_details", id: :serial, force: :cascade do |t|
-    t.integer "quantity"
+    t.integer "quantity", default: 1
     t.string "serial_numbers"
     t.integer "delivery_id"
     t.integer "order_detail_id"
@@ -371,6 +371,8 @@ ActiveRecord::Schema.define(version: 20191123034219) do
     t.boolean "is_show_detail", default: true
     t.integer "number_per_page", default: 12
     t.boolean "use_filter", default: false
+    t.integer "limit_product_name", default: 52
+    t.string "alias"
     t.index ["brand_group_id"], name: "index_erp_menus_menus_on_brand_group_id"
     t.index ["creator_id"], name: "index_erp_menus_menus_on_creator_id"
   end
@@ -609,7 +611,6 @@ ActiveRecord::Schema.define(version: 20191123034219) do
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_erp_products_cache_stocks_on_product_id"
     t.index ["state_id"], name: "index_erp_products_cache_stocks_on_state_id"
-    t.index ["stock"], name: "index_erp_products_cache_stocks_on_stock"
     t.index ["warehouse_id"], name: "index_erp_products_cache_stocks_on_warehouse_id"
   end
 
@@ -796,8 +797,8 @@ ActiveRecord::Schema.define(version: 20191123034219) do
   create_table "erp_products_product_images", id: :serial, force: :cascade do |t|
     t.integer "product_id"
     t.string "image_url"
-    t.datetime "created_at", default: "2019-11-15 04:27:38", null: false
-    t.datetime "updated_at", default: "2019-11-15 04:27:38", null: false
+    t.datetime "created_at", default: "2017-05-15 03:54:25", null: false
+    t.datetime "updated_at", default: "2017-05-15 03:54:25", null: false
     t.index ["product_id"], name: "index_erp_products_product_images_on_product_id"
   end
 
@@ -843,17 +844,18 @@ ActiveRecord::Schema.define(version: 20191123034219) do
     t.string "product_intro_link"
     t.text "cache_search"
     t.boolean "is_stock_inventory", default: false
+    t.string "ebay_id"
     t.string "alias"
+    t.string "amazon_id"
     t.boolean "is_sold_out", default: false
     t.text "cache_properties"
     t.integer "cache_stock"
     t.boolean "is_call", default: false
-    t.string "ebay_id"
-    t.string "amazon_id"
     t.text "specs"
     t.string "dimentions"
     t.string "weights"
     t.string "warranty"
+    t.string "datasheet"
     t.index ["accessory_id"], name: "index_erp_products_products_on_accessory_id"
     t.index ["brand_id"], name: "index_erp_products_products_on_brand_id"
     t.index ["category_id"], name: "index_erp_products_products_on_category_id"
@@ -1128,15 +1130,15 @@ ActiveRecord::Schema.define(version: 20191123034219) do
     t.string "timezone"
     t.boolean "active", default: false
     t.integer "creator_id"
+    t.integer "contact_id"
     t.text "permissions"
     t.string "confirmation_token"
-    t.datetime "confirmed_at", default: -> { "CURRENT_TIMESTAMP" }
+    t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.bigint "user_group_id"
     t.string "address"
     t.text "data"
     t.text "cache_search"
-    t.integer "contact_id"
     t.index ["confirmation_token"], name: "index_erp_users_on_confirmation_token", unique: true
     t.index ["contact_id"], name: "index_erp_users_on_contact_id"
     t.index ["creator_id"], name: "index_erp_users_on_creator_id"
