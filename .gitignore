@@ -22,6 +22,7 @@
 # Ignore Gemfile
 /Gemfile
 /Gemfile.lock
+/data.dump
 
 # Ignore database.yml
 /config/database.yml
