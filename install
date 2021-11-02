@@ -37,7 +37,7 @@ do
     done
     
     # clone into engine folder
-    git clone "http://github.com/timhangcongnghe/erp-$git_name" "$var"
+    git clone "http://github.com/diennuoctranchi/erp-$git_name" "$var"
     cd "$var"
     git checkout develop
     
